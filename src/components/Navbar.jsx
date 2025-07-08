@@ -9,7 +9,6 @@ const Navbar = () => {
     { path: '/', label: 'Educación' },
     { path: '/denuncias', label: 'Denuncias' },
     { path: '/blog', label: 'Blog' },
-    { path: '/recursos', label: 'Recursos' }
   ];
 
   const toggleMenu = () => {

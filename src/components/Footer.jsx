@@ -19,7 +19,6 @@ const Footer = () => {
             <ul className="footer-links">
               <li><a href="/">Educación</a></li>
               <li><a href="/denuncias">Denuncias</a></li>
-              <li><a href="/recursos">Recursos</a></li>
             </ul>
           </div>
           
@@ -27,7 +26,6 @@ const Footer = () => {
             <h4 className="footer-subtitle">Ayuda</h4>
             <ul className="footer-links">
               <li><a href="/denuncias">Reportar Situación</a></li>
-              <li><a href="/recursos">Recursos de Apoyo</a></li>
               <li><a href="/blog">Blog y Noticias</a></li>
             </ul>
           </div>
