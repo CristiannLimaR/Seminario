@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import './Blog.css';
+import ReactMarkdown from 'react-markdown';
 
 const Blog = () => {
   const [selectedPost, setSelectedPost] = useState(null);
@@ -14,15 +15,17 @@ const Blog = () => {
       category: 'Educación',
       image: 'https://images.pexels.com/photos/5212345/pexels-photo-5212345.jpeg?auto=compress&cs=tinysrgb&w=600',
       content: `
-        <h2 class="content-subtitle">¿Qué es la violencia verbal?</h2>
-        <p class="content-paragraph">La violencia verbal incluye insultos, humillaciones, amenazas y comentarios despectivos que afectan la autoestima y el bienestar emocional de los estudiantes.</p>
-        <h3 class="content-subheading">Señales de alerta:</h3>
-        <ul>
-          <li class="content-list-item">Cambios repentinos en el comportamiento.</li>
-          <li class="content-list-item">Aislamiento social.</li>
-          <li class="content-list-item">Bajo rendimiento académico.</li>
-        </ul>
-        <p class="content-paragraph">Es fundamental que docentes y padres estén atentos a estos signos para intervenir a tiempo.</p>
+## ¿Qué es la violencia verbal?
+
+La violencia verbal incluye insultos, humillaciones, amenazas y comentarios despectivos que afectan la autoestima y el bienestar emocional de los estudiantes.
+
+### Señales de alerta:
+
+- Cambios repentinos en el comportamiento.
+- Aislamiento social.
+- Bajo rendimiento académico.
+
+Es fundamental que docentes y padres estén atentos a estos signos para intervenir a tiempo.
       `
     },
     {
@@ -34,14 +37,15 @@ const Blog = () => {
       category: 'Familia',
       image: 'https://images.pexels.com/photos/4545958/pexels-photo-4545958.jpeg?auto=compress&cs=tinysrgb&w=600',
       content: `
-        <h2 class="content-subtitle">Ambiente familiar saludable</h2>
-        <p class="content-paragraph">La comunicación respetuosa es clave para prevenir la violencia verbal en casa. Los padres deben ser ejemplo de autocontrol y empatía.</p>
-        <h3 class="content-subheading">Consejos prácticos:</h3>
-        <ul>
-          <li class="content-list-item">Escucha activa y sin juicios.</li>
-          <li class="content-list-item">Establece límites claros y positivos.</li>
-          <li class="content-list-item">Fomenta la expresión emocional saludable.</li>
-        </ul>
+## Ambiente familiar saludable
+
+La comunicación respetuosa es clave para prevenir la violencia verbal en casa. Los padres deben ser ejemplo de autocontrol y empatía.
+
+### Consejos prácticos:
+
+- Escucha activa y sin juicios.
+- Establece límites claros y positivos.
+- Fomenta la expresión emocional saludable.
       `
     },
     {
@@ -53,14 +57,15 @@ const Blog = () => {
       category: 'Tecnología',
       image: 'https://images.pexels.com/photos/267350/pexels-photo-267350.jpeg?auto=compress&cs=tinysrgb&w=600',
       content: `
-        <h2 class="content-subtitle">Redes sociales y ciberacoso</h2>
-        <p class="content-paragraph">La violencia verbal en línea puede ser tan dañina como la presencial. Es importante educar sobre el uso responsable de la tecnología.</p>
-        <h3 class="content-subheading">¿Qué hacer?</h3>
-        <ul>
-          <li class="content-list-item">Habla abiertamente sobre los riesgos digitales.</li>
-          <li class="content-list-item">Supervisa el uso de dispositivos.</li>
-          <li class="content-list-item">Promueve el respeto y la empatía en línea.</li>
-        </ul>
+## Redes sociales y ciberacoso
+
+La violencia verbal en línea puede ser tan dañina como la presencial. Es importante educar sobre el uso responsable de la tecnología.
+
+### ¿Qué hacer?
+
+- Habla abiertamente sobre los riesgos digitales.
+- Supervisa el uso de dispositivos.
+- Promueve el respeto y la empatía en línea.
       `
     }
   ];
@@ -100,7 +105,7 @@ const Blog = () => {
             
             <div className="post-content">
              {selectedPost.content && (
-                <div dangerouslySetInnerHTML={{ __html: selectedPost.content }} />
+                <ReactMarkdown>{selectedPost.content}</ReactMarkdown>
               )}
             </div>
           </article>

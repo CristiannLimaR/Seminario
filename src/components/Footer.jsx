@@ -1,56 +1,58 @@
 const Footer = () => {
   return (
     <footer className="footer">
-      <div className="container">
-        <div className="footer-content">
-          <div className="footer-section">
-            <h3 className="footer-title">
-              <span className="footer-icon">🛡️</span>
-              Voz Segura
-            </h3>
-            <p className="footer-description">
-              Plataforma dedicada a la prevención y concienciación sobre la violencia verbal.
-              Juntos construimos un entorno más seguro y respetuoso.
-            </p>
-          </div>
-          
-          <div className="footer-section">
-            <h4 className="footer-subtitle">Enlaces Rápidos</h4>
-            <ul className="footer-links">
-              <li><a href="/">Educación</a></li>
-              <li><a href="/denuncias">Denuncias</a></li>
-            </ul>
-          </div>
-          
-          <div className="footer-section">
-            <h4 className="footer-subtitle">Ayuda</h4>
-            <ul className="footer-links">
-              <li><a href="/denuncias">Reportar Situación</a></li>
-              <li><a href="/blog">Blog y Noticias</a></li>
-            </ul>
-          </div>
-          
-          <div className="footer-section">
-            <h4 className="footer-subtitle">Contacto</h4>
-            <p className="footer-contact">
-              📧 info@vozsegura.org<br />
-              📞 800-123-4567<br />
-              🌐 www.vozsegura.org
-            </p>
-          </div>
+      <div className="footer-content">
+        <div className="footer-section">
+          <h3 className="footer-title">
+            <span className="footer-icon">🛡️</span>
+            Voz Segura
+          </h3>
+          <p className="footer-description">
+            Plataforma dedicada a la prevención y concienciación sobre la violencia verbal.
+            Juntos construimos un entorno más seguro y respetuoso.
+          </p>
         </div>
         
-        <div className="footer-bottom">
-          <p>&copy; 2024 Voz Segura. Todos los derechos reservados.</p>
-          <p>Plataforma educativa sin fines de lucro</p>
+        <div className="footer-section">
+          <h4 className="footer-subtitle">Enlaces Rápidos</h4>
+          <ul className="footer-links">
+            <li><a href="/">Educación</a></li>
+            <li><a href="/denuncias">Denuncias</a></li>
+          </ul>
+        </div>
+        
+        <div className="footer-section">
+          <h4 className="footer-subtitle">Ayuda</h4>
+          <ul className="footer-links">
+            <li><a href="/denuncias">Reportar Situación</a></li>
+            <li><a href="/blog">Blog y Noticias</a></li>
+          </ul>
+        </div>
+        
+        <div className="footer-section">
+          <h4 className="footer-subtitle">Contacto</h4>
+          <p className="footer-contact">
+            📧 info@vozsegura.org<br />
+            📞 800-123-4567<br />
+            🌐 www.vozsegura.org
+          </p>
         </div>
       </div>
       
-      <style jsx>{`
+      <div className="footer-bottom">
+        <p>&copy; 2024 Voz Segura. Todos los derechos reservados.</p>
+        <p>Plataforma educativa sin fines de lucro</p>
+      </div>
+      
+      <style>{`
         .footer {
           background-color: #1f2937;
           color: white;
           padding: 3rem 0 1rem;
+          width: 100vw;
+          min-width: 100vw;
+          margin: 0;
+          box-sizing: border-box;
         }
         
         .footer-content {

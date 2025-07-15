@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { createReport } from '../services/reportService';
 import './Reports.css';
 
 const Reports = () => {
@@ -9,10 +10,13 @@ const Reports = () => {
     frequency: '',
     impact: '',
     support: '',
-    anonymous: true
+    anonymous: true,
+    studentId: ''
   });
 
   const [submitted, setSubmitted] = useState(false);
+  const [error, setError] = useState('');
+  const [loading, setLoading] = useState(false);
 
   const handleInputChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -22,25 +26,66 @@ const Reports = () => {
     }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Aquí normalmente enviarías los datos a un servidor
-    console.log('Reporte enviado:', formData);
-    setSubmitted(true);
-    
-    // Resetear después de 3 segundos
-    setTimeout(() => {
-      setSubmitted(false);
-      setFormData({
-        reportType: '',
-        description: '',
-        location: '',
-        frequency: '',
-        impact: '',
-        support: '',
-        anonymous: true
-      });
-    }, 3000);
+    setError('');
+    setLoading(true);
+
+    // Validar carné si no es anónimo
+    if (!formData.anonymous && !formData.studentId.trim()) {
+      setError('El carné del estudiante es obligatorio si no es anónimo.');
+      setLoading(false);
+      return;
+    }
+    if (!formData.anonymous && !/^\d{7}$/.test(formData.studentId)) {
+      setError('El carné debe tener exactamente 7 números.');
+      setLoading(false);
+      return;
+    }
+    // Validar longitud mínima de la descripción
+    if (!formData.description || formData.description.trim().length < 10) {
+      setError('La descripción debe tener al menos 10 caracteres.');
+      setLoading(false);
+      return;
+    }
+
+    try {
+      // Preparar datos para enviar al backend
+      const reportData = {
+        reportType: formData.reportType,
+        description: formData.description,
+        location: formData.location || undefined,
+        frequency: formData.frequency || undefined,
+        impact: formData.impact || undefined,
+        support: formData.support || undefined,
+        anonymous: formData.anonymous,
+        studentId: formData.anonymous ? undefined : formData.studentId
+      };
+
+      // Enviar al backend
+      await createReport(reportData);
+      
+      setSubmitted(true);
+      
+      // Resetear después de 3 segundos
+      setTimeout(() => {
+        setSubmitted(false);
+        setFormData({
+          reportType: '',
+          description: '',
+          location: '',
+          frequency: '',
+          impact: '',
+          support: '',
+          anonymous: true,
+          studentId: ''
+        });
+      }, 3000);
+    } catch (err) {
+      setError(err.message || 'Error al enviar el reporte. Por favor, intenta de nuevo.');
+    } finally {
+      setLoading(false);
+    }
   };
 
   const supportOptions = [
@@ -239,8 +284,38 @@ const Reports = () => {
                 </p>
               </div>
 
-              <button type="submit" className="btn btn-primary submit-btn">
-                Enviar Reporte
+              {!formData.anonymous && (
+                <div className="form-group">
+                  <label htmlFor="studentId" className="form-label">
+                    Carné del estudiante*
+                  </label>
+                  <input
+                    type="text"
+                    id="studentId"
+                    name="studentId"
+                    value={formData.studentId}
+                    onChange={handleInputChange}
+                    className="form-input"
+                    placeholder="Ej: 2023123"
+                    required={!formData.anonymous}
+                    maxLength={7}
+                    pattern="\d{7}"
+                    inputMode="numeric"
+                  />
+                </div>
+              )}
+              {error && (
+                <div className="error-message">
+                  <span className="error-icon">⚠️</span>
+                  {error}
+                </div>
+              )}
+              <button 
+                type="submit" 
+                className="btn btn-primary submit-btn"
+                disabled={loading}
+              >
+                {loading ? 'Enviando...' : 'Enviar Reporte'}
               </button>
             </form>
           </div>

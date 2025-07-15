@@ -1,9 +1,11 @@
 import { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
+import { useAuth } from '../context/AuthContext';
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const location = useLocation();
+  const { user, logout } = useAuth();
 
   const navItems = [
     { path: '/', label: 'Educación' },
@@ -36,6 +38,23 @@ const Navbar = () => {
               </Link>
             ))}
           </div>
+          {/* Enlace a login o logout */}
+          <div className="nav-auth">
+            {user ? (
+              <>
+                <span className="nav-user">Hola, {user.name}</span>
+                <button className="nav-logout" onClick={logout}>Cerrar sesión</button>
+              </>
+            ) : (
+              <Link
+                to="/login"
+                className={`nav-link ${location.pathname === '/login' ? 'nav-link-active' : ''}`}
+                onClick={() => setIsMenuOpen(false)}
+              >
+                Iniciar sesión
+              </Link>
+            )}
+          </div>
           
           <button 
             className="nav-toggle"
@@ -49,7 +68,7 @@ const Navbar = () => {
         </div>
       </div>
       
-      <style jsx>{`
+      <style>{`
         .navbar {
           position: fixed;
           top: 0;
@@ -122,6 +141,29 @@ const Navbar = () => {
           background-color: #1f2937;
           transition: 0.3s;
           border-radius: 3px;
+        }
+        
+        .nav-auth {
+          display: flex;
+          align-items: center;
+          gap: 1rem;
+        }
+        .nav-user {
+          color: #2563eb;
+          font-weight: 500;
+        }
+        .nav-logout {
+          background: #dc2626;
+          color: white;
+          border: none;
+          padding: 0.5rem 1rem;
+          border-radius: 6px;
+          cursor: pointer;
+          font-size: 0.875rem;
+          transition: background-color 0.3s ease;
+        }
+        .nav-logout:hover {
+          background: #b91c1c;
         }
         
         @media (max-width: 768px) {
