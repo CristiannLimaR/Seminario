@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { useAuth } from '../context/AuthContext';
 import AdminReports from './AdminReports';
-import AdminBlog from './AdminBlog';
 
 const AdminDashboard = () => {
   const [activeTab, setActiveTab] = useState('dashboard');
@@ -10,7 +9,6 @@ const AdminDashboard = () => {
   const tabs = [
     { id: 'dashboard', label: 'Dashboard', icon: '📊' },
     { id: 'reports', label: 'Denuncias', icon: '📋' },
-    { id: 'blog', label: 'Blog', icon: '📝' }
   ];
 
   const handleLogout = () => {
@@ -21,8 +19,6 @@ const AdminDashboard = () => {
     switch (activeTab) {
       case 'reports':
         return <AdminReports />;
-      case 'blog':
-        return <AdminBlog />;
       case 'dashboard':
       default:
         return (
